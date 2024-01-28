@@ -148,6 +148,7 @@
 \definecolor{awesome-nephritis}{HTML}{27AE60}
 \definecolor{awesome-concrete}{HTML}{95A5A6}
 \definecolor{awesome-darknight}{HTML}{131A28}
+\definecolor{awesome-blue}{HTML}{0c56a5}
 \colorlet{awesome}{awesome-red}
 
 % Boolean value to switch section color highlighting
@@ -259,7 +260,7 @@
 % Usage: \position{<position>}
 \newcommand*{\position}[1]{\def\@position{#1}}
 
-% Defines writer's mobile (optional)
+% Defines writer's  (optional)
 % Usage: \mobile{<mobile number>}
 \newcommand*{\mobile}[1]
 {
@@ -303,7 +304,7 @@
 \newcommand*{\stackoverflow}[2]{\def\@stackoverflowid{#1}\def\@stackoverflowname{#2}}
 
 % Defines writer's linked-in (optional)
-% Usage: \linkedin{<linked-in-nick>}
+% Usage: \{<linked-in-nick>}
 \newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
 
 % Defines writer's orcid (optional)
@@ -633,6 +634,21 @@
   \color{sectiondivider}\vhrulefill{0.9pt}
 }
 
+\newcommand{\cvsectionfirst}[1]{%
+	%\vspace{\acvSectionTopSkip}
+	\sectionstyle{#1}
+	\phantomsection
+	\color{sectiondivider}\vhrulefill{0.9pt}
+}
+
+% Usage: \cvsection{<section-title>}
+\newcommand{\cvsectionmod}[1]{%
+	\vspace{-4.0mm}
+	\sectionstyle{#1}
+	\phantomsection
+	\color{sectiondivider}\vhrulefill{0.9pt}
+}
+
 % Define a subsection for CV
 % Usage: \cvsubsection{<subsection-title>}
 \newcommand{\cvsubsection}[1]{%
@@ -676,6 +692,49 @@
   \end{tabular*}%
 }
 
+\newcommand*{\cventrymod}[5]{%
+	\vspace{-6.0mm}
+	\setlength\tabcolsep{0pt}
+	\setlength{\extrarowheight}{0pt}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+		\ifempty{#2#3}
+		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		\ifstrempty{#5}
+		{}
+		{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}} \\}
+	\end{tabular*}%
+}
+
+% Entry made for putting several values inside the cventry
+\newcommand*{\cventrynew}[5]{%
+	\vspace{-4.0mm}
+	\setlength\tabcolsep{0pt}
+	\setlength{\extrarowheight}{0pt}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+		\ifempty{#2#3}
+		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+	\end{tabular*}%
+}
+
+% Entry made for putting several values inside the cventry
+\newcommand*{\cventrynewnew}[5]{%
+	\vspace{-8.5mm}
+	\setlength\tabcolsep{0pt}
+	\setlength{\extrarowheight}{0pt}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+		\ifempty{#2#3}
+		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+		\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+	\end{tabular*}%
+}
+
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
   \begin{center}
@@ -707,7 +766,7 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 6.5cm} R{4.95cm}}
 }{%
     \end{tabular*}
   \end{center}
