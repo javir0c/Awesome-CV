@@ -513,8 +513,8 @@
 			\ifthenelse{\isundefined{\@homepage}}%
 			{}%
 			{%	
-				\ifbool{isstart}{\setbool{isstart}{false}}%
-				\href{http://\@homepage}{\\ \faHome\acvHeaderIconSep\@homepage}%
+				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+				\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
 			}%
 			\ifthenelse{\isundefined{\@github}}%
 			{}%
