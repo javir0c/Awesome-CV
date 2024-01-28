@@ -148,7 +148,6 @@
 \definecolor{awesome-nephritis}{HTML}{27AE60}
 \definecolor{awesome-concrete}{HTML}{95A5A6}
 \definecolor{awesome-darknight}{HTML}{131A28}
-\definecolor{awesome-blue}{HTML}{0c56a5}
 \colorlet{awesome}{awesome-red}
 
 % Boolean value to switch section color highlighting
@@ -260,7 +259,7 @@
 % Usage: \position{<position>}
 \newcommand*{\position}[1]{\def\@position{#1}}
 
-% Defines writer's  (optional)
+% Defines writer's mobile (optional)
 % Usage: \mobile{<mobile number>}
 \newcommand*{\mobile}[1]
 {
@@ -304,7 +303,7 @@
 \newcommand*{\stackoverflow}[2]{\def\@stackoverflowid{#1}\def\@stackoverflowname{#2}}
 
 % Defines writer's linked-in (optional)
-% Usage: \{<linked-in-nick>}
+% Usage: \linkedin{<linked-in-nick>}
 \newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
 
 % Defines writer's orcid (optional)
@@ -444,181 +443,177 @@
 % Define a header for CV
 % Usage: \makecvheader
 \newcommand*{\makecvheader}[1][C]{%
-	\newcommand*{\drawphoto}{%
-		\ifthenelse{\isundefined{\@photo}}{}{%
-			\newlength{\photodim}
-			\ifthenelse{\equal{\@photoshape}{circle}}%
-			{\setlength{\photodim}{1.3cm}}%
-			{\setlength{\photodim}{1.8cm}}%
-			\ifthenelse{\equal{\@photoedge}{edge}}%
-			{\def\@photoborder{darkgray}}%
-			{\def\@photoborder{none}}%
-			\begin{tikzpicture}%
-				\node[\@photoshape, draw=\@photoborder, line width=0.9mm, inner sep=\photodim, fill overzoom image=\@photo] () {};
-			\end{tikzpicture}
-		}%
-	}
-	\newlength{\headertextwidth}
-	\newlength{\headerphotowidth}
-	\ifthenelse{\isundefined{\@photo}}{
-		\setlength{\headertextwidth}{\textwidth}
-		\setlength{\headerphotowidth}{0cm}
-	}{%
-		\setlength{\headertextwidth}{0.76\textwidth}
-		\setlength{\headerphotowidth}{0.24\textwidth}
-	}%
-	\begin{minipage}[c]{\headerphotowidth}%
-		\vspace{-0.2cm}
-		\ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
-	\end{minipage}
-	\begin{minipage}[c]{\headertextwidth}
-		\ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedright}{\centering}}
-		\vspace{0.2cm}
-		%\smallskip
-		
-		\raggedright\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
-		\\[\acvHeaderAfterNameSkip]%
-		\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-		\ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
-		\headersocialstyle{%
-			\newbool{isstart}%
-			\setbool{isstart}{true}%
-			\ifthenelse{\isundefined{\@mobile}}%
-			{}%
-			{%
-				\href{\@teluri}{\faMobile\acvHeaderIconSep\@mobile}%
-				\setbool{isstart}{false}%
-			}%
-			\ifthenelse{\isundefined{\@email}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
-			}%
-			\ifthenelse{\isundefined{\@dateofbirth}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				% \mbox prevents wrapping of elements%
-				\mbox{\faBirthdayCake\acvHeaderIconSep\@dateofbirth}%
-			}%
-			\ifthenelse{\isundefined{\@homepage}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
-			}%
-			\ifthenelse{\isundefined{\@github}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
-			}%
-			\ifthenelse{\isundefined{\@gitlab}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\@gitlab}%
-			}%
-			\ifthenelse{\isundefined{\@bitbucket}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://bitbucket.com/\@bitbucket}{\faBitbucket\acvHeaderIconSep\@bitbucket}%
-			}%
-			\ifthenelse{\isundefined{\@stackoverflowid}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
-			}%
-			\ifthenelse{\isundefined{\@linkedin}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
-			}%
-			\ifthenelse{\isundefined{\@orcid}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://orcid.org/\@orcid}{\faOrcid\acvHeaderIconSep\@orcid}%
-			}%
-			\ifthenelse{\isundefined{\@twitter}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
-			}%
-			\ifthenelse{\isundefined{\@mastodonname}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://\@mastodoninstance/@\@mastodonname}{\faMastodon\acvHeaderIconSep\@mastodonname}%
-			}%
-			\ifthenelse{\isundefined{\@skype}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\faSkype\acvHeaderIconSep\@skype%
-			}%
-			\ifthenelse{\isundefined{\@reddit}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
-			}%
-			\ifthenelse{\isundefined{\@researchgate}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.researchgate.net/profile/\@researchgate}{\faResearchgate\acvHeaderIconSep\@researchgate}%
-			}%
-			\ifthenelse{\isundefined{\@xing}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
-			}%
-			\ifthenelse{\isundefined{\@medium}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\@medium}%
-			}%
-			\ifthenelse{\isundefined{\@kaggle}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://kaggle.com/\@kaggle}{\faKaggle\acvHeaderIconSep\@kaggle}%
-			}%
-			\ifthenelse{\isundefined{\@hackerrank}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.hackerrank.com/\@hackerrank}{\faHackerrank\acvHeaderIconSep\@hackerrank}%
-			}%
-			\ifthenelse{\isundefined{\@googlescholarid}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\@googlescholarname}%
-			}%
-			\ifthenelse{\isundefined{\@extrainfo}}%
-			{}%
-			{%
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\@extrainfo%
-			}%
-		} \\[\acvHeaderAfterSocialSkip]%
-		\ifthenelse{\isundefined{\@quote}}%
-		{}%
-		{\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
-	\end{minipage}%
-	
-	\begin{minipage}[c]{\headerphotowidth}%
-		\ifthenelse{\equal{\@photoalign}{right}}{\raggedleft\drawphoto}{}
-	\end{minipage}
+  \newcommand*{\drawphoto}{%
+    \ifthenelse{\isundefined{\@photo}}{}{%
+      \newlength{\photodim}
+      \ifthenelse{\equal{\@photoshape}{circle}}%
+        {\setlength{\photodim}{1.3cm}}%
+        {\setlength{\photodim}{1.8cm}}%
+      \ifthenelse{\equal{\@photoedge}{edge}}%
+        {\def\@photoborder{darkgray}}%
+        {\def\@photoborder{none}}%
+      \begin{tikzpicture}%
+        \node[\@photoshape, draw=\@photoborder, line width=0.9mm, inner sep=\photodim, fill overzoom image=\@photo] () {};
+      \end{tikzpicture}
+    }%
+  }
+  \newlength{\headertextwidth}
+  \newlength{\headerphotowidth}
+  \ifthenelse{\isundefined{\@photo}}{
+    \setlength{\headertextwidth}{\textwidth}
+    \setlength{\headerphotowidth}{0cm}
+  }{%
+    \setlength{\headertextwidth}{0.76\textwidth}
+    \setlength{\headerphotowidth}{0.24\textwidth}
+  }%
+  \begin{minipage}[c]{\headerphotowidth}%
+    \ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
+  \end{minipage}
+  \begin{minipage}[c]{\headertextwidth}
+    \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedright}{\centering}}
+    \vspace{1em}
+    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+    \\[\acvHeaderAfterNameSkip]%
+    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
+    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
+    \headersocialstyle{%
+      \newbool{isstart}%
+      \setbool{isstart}{true}%
+      \ifthenelse{\isundefined{\@mobile}}%
+        {}%
+        {%
+          \href{\@teluri}{\faMobile\acvHeaderIconSep\@mobile}%
+          \setbool{isstart}{false}%
+        }%
+      \ifthenelse{\isundefined{\@email}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
+        }%
+      \ifthenelse{\isundefined{\@dateofbirth}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          % \mbox prevents wrapping of elements%
+          \mbox{\faBirthdayCake\acvHeaderIconSep\@dateofbirth}%
+        }%
+      \ifthenelse{\isundefined{\@homepage}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
+        }%
+      \ifthenelse{\isundefined{\@github}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
+        }%
+      \ifthenelse{\isundefined{\@gitlab}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\@gitlab}%
+        }%
+      \ifthenelse{\isundefined{\@bitbucket}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://bitbucket.com/\@bitbucket}{\faBitbucket\acvHeaderIconSep\@bitbucket}%
+        }%
+      \ifthenelse{\isundefined{\@stackoverflowid}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
+        }%
+      \ifthenelse{\isundefined{\@linkedin}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
+        }%
+      \ifthenelse{\isundefined{\@orcid}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://orcid.org/\@orcid}{\faOrcid\acvHeaderIconSep\@orcid}%
+        }%
+      \ifthenelse{\isundefined{\@twitter}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
+        }%
+      \ifthenelse{\isundefined{\@mastodonname}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://\@mastodoninstance/@\@mastodonname}{\faMastodon\acvHeaderIconSep\@mastodonname}%
+        }%
+      \ifthenelse{\isundefined{\@skype}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \faSkype\acvHeaderIconSep\@skype%
+        }%
+      \ifthenelse{\isundefined{\@reddit}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
+        }%
+      \ifthenelse{\isundefined{\@researchgate}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://www.researchgate.net/profile/\@researchgate}{\faResearchgate\acvHeaderIconSep\@researchgate}%
+        }%
+      \ifthenelse{\isundefined{\@xing}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
+        }%
+      \ifthenelse{\isundefined{\@medium}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\@medium}%
+        }%
+      \ifthenelse{\isundefined{\@kaggle}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://kaggle.com/\@kaggle}{\faKaggle\acvHeaderIconSep\@kaggle}%
+        }%
+      \ifthenelse{\isundefined{\@hackerrank}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://www.hackerrank.com/\@hackerrank}{\faHackerrank\acvHeaderIconSep\@hackerrank}%
+        }%
+      \ifthenelse{\isundefined{\@googlescholarid}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\@googlescholarname}%
+        }%
+      \ifthenelse{\isundefined{\@extrainfo}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \@extrainfo%
+        }%
+    } \\[\acvHeaderAfterSocialSkip]%
+    \ifthenelse{\isundefined{\@quote}}%
+      {}%
+      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
+  \end{minipage}%
+  \begin{minipage}[c]{\headerphotowidth}%
+    \ifthenelse{\equal{\@photoalign}{right}}{\raggedleft\drawphoto}{}
+  \end{minipage}
 }
 
 % Define a footer for CV
@@ -637,21 +632,6 @@
   \sectionstyle{#1}
   \phantomsection
   \color{sectiondivider}\vhrulefill{0.9pt}
-}
-
-\newcommand{\cvsectionfirst}[1]{%
-	\vspace{-2.0mm}
-	\sectionstyle{#1}
-	\phantomsection
-	\color{sectiondivider}\vhrulefill{0.9pt}
-}
-
-% Usage: \cvsection{<section-title>}
-\newcommand{\cvsectionmod}[1]{%
-	\vspace{-4.0mm}
-	\sectionstyle{#1}
-	\phantomsection
-	\color{sectiondivider}\vhrulefill{0.9pt}
 }
 
 % Define a subsection for CV
@@ -697,49 +677,6 @@
   \end{tabular*}%
 }
 
-\newcommand*{\cventrymod}[5]{%
-	\vspace{-6.0mm}
-	\setlength\tabcolsep{0pt}
-	\setlength{\extrarowheight}{0pt}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-		\ifempty{#2#3}
-		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		\ifstrempty{#5}
-		{}
-		{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}} \\}
-	\end{tabular*}%
-}
-
-% Entry made for putting several values inside the cventry
-\newcommand*{\cventrynew}[5]{%
-	\vspace{-4.0mm}
-	\setlength\tabcolsep{0pt}
-	\setlength{\extrarowheight}{0pt}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-		\ifempty{#2#3}
-		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
-	\end{tabular*}%
-}
-
-% Entry made for putting several values inside the cventry
-\newcommand*{\cventrynewnew}[5]{%
-	\vspace{-8.5mm}
-	\setlength\tabcolsep{0pt}
-	\setlength{\extrarowheight}{0pt}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-		\ifempty{#2#3}
-		{\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-			\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-		\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
-	\end{tabular*}%
-}
-
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
   \begin{center}
@@ -771,7 +708,7 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 6.5cm} R{4.95cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
 }{%
     \end{tabular*}
   \end{center}
