@@ -18,7 +18,7 @@
 % CONFIGURATIONS
 %-------------------------------------------------------------------------------
 % A4 paper size by default, use 'letterpaper' for US letter
-\documentclass[11pt, a4paper]{awesome-cv-private}
+\documentclass[11pt, a4paper]{awesome-resumee}
 
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -26,7 +26,7 @@
 % Color for highlights
 % Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
 %                 awesome-nephritis, awesome-concrete, awesome-darknight
-\colorlet{awesome}{awesome-blue}
+\colorlet{awesome}{awesome-bluecerulean}
 % Uncomment if you would like to specify your own color
 % \definecolor{awesome}{HTML}{CA63A8}
 
@@ -51,7 +51,7 @@
 %-------------------------------------------------------------------------------
 % Available options: circle|rectangle,edge/noedge,left/right
 % \photo{./examples/profile.png}
-\photo[circle,noedge,left]{./media/profile}
+%\photo[circle,noedge,left]{./media/profile}
 \name{Javier}{Rocamora García}
 \position{BIE Intern Amazon{\enskip\cdotp\enskip}M.Sc. Data Science Student{\enskip\cdotp\enskip}Computer Engineer \& Business Management}
 \address{\faMapPin \hspace{0.5em} Luxembourg, Luxembourg}
@@ -60,8 +60,8 @@
 \linkedin{javir0c}
 %\email{javierrocamoragarcia@gmail.com}
 %\github{javir0c}
-\homepage{javir0c.github.io/home/}
 \dateofbirth{October 24th, 1997}
+\homepage{javir0c.github.io/home/}
 % \gitlab{gitlab-id}
 % \stackoverflow{SO-id}{SO-name}
 % \twitter{@twit}
@@ -73,11 +73,10 @@
 % \googlescholar{googlescholar-id}{name-to-display}
 %% \firstname and \lastname will be used
 % \googlescholar{googlescholar-id}{}
-\birth{Alicante, Spain}
 % \extrainfo{extra information}
+\birth{Alicante, Spain}
 
 \quote{``On a relentless quest to uncover insights from the digital realm."}
-
 
 %-------------------------------------------------------------------------------
 \begin{document}
@@ -89,7 +88,7 @@
 % Leave any of these blank if they are not needed
 \makecvfooter
   {\today}
-  {Javier Rocamora García ~~~·~~~ LaTeX Curriculum Vitae}
+  {Javier Rocamora García ~~~·~~~ LaTeX Resumee}
   {\thepage}
 
 
@@ -98,13 +97,15 @@
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
 \input{cv/summary.tex}
-\input{cv/education.tex}
 \input{cv/experience.tex}
+\input{cv/education.tex}
 \input{cv/honors.tex}
 \input{cv/skills.tex}
+\input{cv/certificates.tex}
+\input{cv/volunteering.tex}
 
 %\input{cv/extracurricular.tex}
-%\input{cv/certificates.tex}
+
 %\input{cv/presentation.tex}
 %\input{cv/writing.tex}
 %\input{cv/committees.tex}

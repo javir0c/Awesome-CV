@@ -362,6 +362,10 @@
   }%
 }
 
+% Defines place of birth
+% Usage: \extrainfo{<extra information>}
+\newcommand*{\birth}[1]{\def\@birth{#1}}
+
 % Defines writer's extra information (optional)
 % Usage: \extrainfo{<extra information>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
@@ -480,7 +484,7 @@
 		\headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
 		\\[\acvHeaderAfterNameSkip]%
 		\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-		\ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
+		\ifthenelse{\isundefined{\vspace*{0.1cm}\@address}}{}{\headeraddressstyle{\vspace*{0.1cm}\@address\\[\acvHeaderAfterAddressSkip]}}%
 		\vspace{1mm}
 		\headersocialstyle{%
 			\newbool{isstart}%
@@ -488,123 +492,129 @@
 			\ifthenelse{\isundefined{\@mobile}}%
 			{}%
 			{%
-				\href{\@teluri}{\faMobile\acvHeaderIconSep\@mobile}%
+				\href{\@teluri}{\faMobile\acvHeaderIconSep\hspace{0.2em}\@mobile}%
 				\setbool{isstart}{false}%
 			}%
 			\ifthenelse{\isundefined{\@email}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
+				\href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\hspace{0.2em}\@email}%
 			}%
 			\ifthenelse{\isundefined{\@linkedin}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
+				\href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\hspace{0.2em}\@linkedin}%
+			}%
+			\ifthenelse{\isundefined{\@homepage}}%
+			{}%
+			{%	
+				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+				\href{http://\@homepage}{\faGlobe\acvHeaderIconSep\@homepage}%
+			}%
+			\ifthenelse{\isundefined{\@birth}}%
+			{}%
+			{%
+				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+				{\faAddressCard\acvHeaderIconSep\hspace{0.2em}\@birth}
 			}%
 			\ifthenelse{\isundefined{\@dateofbirth}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
 				% \mbox prevents wrapping of elements%
-				\mbox{\faBirthdayCake\acvHeaderIconSep\@dateofbirth}%
-			}%
-			\ifthenelse{\isundefined{\@homepage}}%
-			{}%
-			{%	
-				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
+				\mbox{\faBirthdayCake\acvHeaderIconSep\hspace{0.2em}\@dateofbirth}%
 			}%
 			\ifthenelse{\isundefined{\@github}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\@github}%
+				\href{https://github.com/\@github}{\faGithubSquare\acvHeaderIconSep\hspace{0.2em}\@github}%
 			}%
 			\ifthenelse{\isundefined{\@gitlab}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\@gitlab}%
+				\href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\hspace{0.2em}\@gitlab}%
 			}%
 			\ifthenelse{\isundefined{\@bitbucket}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://bitbucket.com/\@bitbucket}{\faBitbucket\acvHeaderIconSep\@bitbucket}%
+				\href{https://bitbucket.com/\@bitbucket}{\faBitbucket\acvHeaderIconSep\hspace{0.2em}\@bitbucket}%
 			}%
 			\ifthenelse{\isundefined{\@stackoverflowid}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
+				\href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\hspace{0.2em}\@stackoverflowname}%
 			}%
 			\ifthenelse{\isundefined{\@orcid}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://orcid.org/\@orcid}{\faOrcid\acvHeaderIconSep\@orcid}%
+				\href{https://orcid.org/\@orcid}{\faOrcid\acvHeaderIconSep\hspace{0.2em}\@orcid}%
 			}%
 			\ifthenelse{\isundefined{\@twitter}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
+				\href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\hspace{0.2em}\@twitter}%
 			}%
 			\ifthenelse{\isundefined{\@mastodonname}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://\@mastodoninstance/@\@mastodonname}{\faMastodon\acvHeaderIconSep\@mastodonname}%
+				\href{https://\@mastodoninstance/@\@mastodonname}{\faMastodon\acvHeaderIconSep\hspace{0.2em}\@mastodonname}%
 			}%
 			\ifthenelse{\isundefined{\@skype}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\faSkype\acvHeaderIconSep\@skype%
+				\faSkype\acvHeaderIconSep\hspace{0.2em}\@skype%
 			}%
 			\ifthenelse{\isundefined{\@reddit}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
+				\href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\hspace{0.2em}\@reddit}%
 			}%
 			\ifthenelse{\isundefined{\@researchgate}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.researchgate.net/profile/\@researchgate}{\faResearchgate\acvHeaderIconSep\@researchgate}%
+				\href{https://www.researchgate.net/profile/\@researchgate}{\faResearchgate\acvHeaderIconSep\hspace{0.2em}\@researchgate}%
 			}%
 			\ifthenelse{\isundefined{\@xing}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
+				\href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\hspace{0.2em}\@xing}
 			}%
 			\ifthenelse{\isundefined{\@medium}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\@medium}%
+				\href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\hspace{0.2em}\@medium}%
 			}%
 			\ifthenelse{\isundefined{\@kaggle}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://kaggle.com/\@kaggle}{\faKaggle\acvHeaderIconSep\@kaggle}%
+				\href{https://kaggle.com/\@kaggle}{\faKaggle\acvHeaderIconSep\hspace{0.2em}\@kaggle}%
 			}%
 			\ifthenelse{\isundefined{\@hackerrank}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.hackerrank.com/\@hackerrank}{\faHackerrank\acvHeaderIconSep\@hackerrank}%
+				\href{https://www.hackerrank.com/\@hackerrank}{\faHackerrank\acvHeaderIconSep\hspace{0.2em}\@hackerrank}%
 			}%
 			\ifthenelse{\isundefined{\@googlescholarid}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\@googlescholarname}%
+				\href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\hspace{0.2em}\@googlescholarname}%
 			}%
 			\ifthenelse{\isundefined{\@extrainfo}}%
 			{}%
