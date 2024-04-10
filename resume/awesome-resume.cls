@@ -491,7 +491,7 @@
 				{}%
 				{%	
 					\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-					\href{http://\@homepage}{\faGlobe\acvHeaderIconSep\@homepage}%
+					\href{http://\@homepage}{\faGlobe\acvHeaderIconSep\hspace{0.2em}\@homepage}%
 				}%
 				\ifthenelse{\isundefined{\@birth}}%
 				{}%
@@ -601,6 +601,11 @@
 				{%
 					\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
 					\@extrainfo%
+				}%
+				{}
+				{%
+					\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+					{\faLink\acvHeaderIconSep\hspace{0.2em}\href{https://github.com/javir0c/Awesome-CV/raw/master/cv-final/cv-private.pdf}{\underline{\textit{Link to CV}}}}
 				}%
 		} \\[\acvHeaderAfterSocialSkip]%
 		\ifthenelse{\isundefined{\@quote}}%
