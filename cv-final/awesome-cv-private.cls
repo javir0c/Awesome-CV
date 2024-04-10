@@ -625,7 +625,7 @@
 			{}
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				{\faLink\acvHeaderIconSep\hspace{0.2em}\href{https://github.com/javir0c/Awesome-CV/raw/master/cv-final/cv-private.pdf}{\underline{\textit{Link to Resume}}}}
+				{\faLink\acvHeaderIconSep\hspace{0.2em}\href{https://github.com/javir0c/Awesome-CV/raw/master/resume/resume.pdf}{\underline{\textit{Link to Resume}}}}
 			}%
 		} \\[\acvHeaderAfterSocialSkip]%
 		\ifthenelse{\isundefined{\@quote}}%
